@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d7d7d7">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="container-fluid">
+	<div class="row no-gutters">
+	  <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+	  <ul id="sideNav1">
+	  	<li><a href="/myInbox">My Inbox</a></li>
+	  	<li><a href="/myDrafts">My Drafts</a></li>
+	  	<li><a href="/myProjects">My Projects</a></li>
+	  	<li><a href="/createProjects">Create Projects</a></li>
+	  	<li>
+	  	   <form class="bd-search d-flex align-items-center">
+              <input type="search" class="form-control" id="search-input" placeholder="Search Projects" aria-label="Search for..." autocomplete="off">
+              <button class="btn-link bd-search-docs-toggle d-md-none p-0 ml-3" type="button" data-toggle="collapse" data-target="#bd-docs-nav" aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs avigation">
+              </button>
+            </form>
+        </li>
+	  </ul>
+	  </div>
+       <div class="col-12 col-sm-6 col-md-8" >
+            <table class=" table table-striped"  id="Table1">
+                    <thead>
+                      <tr>
+                        <th class="onMinimize">Project ID</th>
+                        <th>Project Name</th>
+                        <th>Document Name</th> 
+                        <th>Current Status</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor = "let docs of documents?.Project"  >
+                      <tr> 
+                        <td class="onMinimize">{{docs.projectId}}</td>
+                        <td>{{docs.projectName}}</td>
+                        <td>{{docs.scenario}}</td> 
+                        <td><button type="button" id="step2Btn" class="btn btn-primary" >Status</button></td>
+                      </tr> 
+                      </tbody>
+            </table>
+        </div>
+  </div>
+</div>

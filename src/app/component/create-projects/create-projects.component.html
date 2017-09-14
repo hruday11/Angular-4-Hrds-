@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d7d7d7">
+	<a class="navbar-brand" href="#">Navbar</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Link</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+		</ul>
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		</form>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row no-gutters">
+		<div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+			<ul id="sideNav1">
+				<li><a href="/myInbox">My Inbox</a></li>
+				<li><a href="/myDrafts">My Drafts</a></li>
+				<li><a href="/myProjects">My Projects</a></li>
+				<li><a href="/createProjects">Create Projects</a></li>
+				<li>
+					<form class="bd-search d-flex align-items-center">
+						<input type="search" class="form-control" id="search-input" placeholder="Search Projects" aria-label="Search for..." autocomplete="off">
+						<button class="btn-link bd-search-docs-toggle d-md-none p-0 ml-3" type="button" data-toggle="collapse" data-target="#bd-docs-nav" aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs avigation">
+						</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+		<div class="col-12 col-sm-6 col-md-8" *ngIf = "step1Div">
+			<h2>Create Project Wizard - Step 1 Of 3</h2>
+			<div class="col-sm-4 offset col-sm-4" id="comboGroup">
+				<select class="selectForm"  [(ngModel)]="selectedScenario.value" required><option *ngFor="let scenario of scenarios" value="{{scenario.value}}">
+					{{scenario.scenario}}
+				</option>
+			</select><br>
+			<select class="selectForm" [(ngModel)]="selectedComplainces.value"> 
+				<option *ngFor="let complaince of complainces" value="{{complaince.value}}">
+					{{complaince.complaince}}
+				</option>
+			</select><br>
+			<select class="selectForm" [(ngModel)]="selectedBudget.value"> 
+				<option *ngFor="let budget of budgets" value="{{budget.value}}">
+					{{budget.budget}}
+				</option>
+			</select><br>
+			<select class="selectForm" [(ngModel)]="selectedSize.value"> 
+				<option *ngFor="let size of sizes" value="{{size.value}}">
+					{{size.size}}
+				</option>
+			</select><br>
+			<select class="selectForm" [(ngModel)]="selectedDuration.value"> 
+				<option *ngFor="let duration of durations" value="{{duration.value}}">
+					{{duration.duration}}
+				</option>
+			</select><br>
+			<select class="selectForm" [(ngModel)]="selectedRole.value"> 
+				<option *ngFor="let role of roles" value="{{role.value}}">
+					{{role.role}}
+				</option>
+			</select><br>
+			<button type="button" (click) = "Step1()" id="step1Btn" class="btn btn-primary">Proceed To Next</button>
+		</div>
+		<div class="alert alert-danger col-sm-4 offset col-sm-4" style=" margin: 0px auto;margin-top: 10px; "  role="alert" *ngIf="ErrorAlert"  >{{ErrorAlert}}</div>
+	</div>
+	<div class="col-12 col-sm-6 col-md-8" *ngIf = "step2Div">
+		<h2>Create Project Wizard - Step 2 Of 3</h2>
+		<div class="col-sm-4 offset col-sm-4" id="comboGroup">
+			<h4>Complaince Documents</h4>
+			<ol style="margin: 0px auto">
+				<li>Functional Specification</li>
+				<li>User Requirement Specification</li>
+				<li>Functional Design</li>
+			</ol>
+			<h4>Project Level Documents</h4>
+			<ol style="margin: 0px auto">
+				<li>{{resDocs?.Scenario}}</li>
+				<li>{{resDocs?.Complainces}}</li>
+				<li>{{resDocs?.Budget}}</li>
+				<li>{{resDocs?.Role}}</li>
+				<li>{{resDocs?.Size}}</li>
+				<li>{{resDocs?.Duration}}</li>
+			</ol >
+		</div>
+		<div class="col-12 col-sm-9 col-md-9 buttonStep2">
+			<button type="button" id="step2Btn" class="btn btn-danger" style="margin: 0px auto"     
+			(click)="cancel()">Cancel</button>
+			<button type="button" id="step2Btn" class="btn btn-danger" (click)=returnWizard1()>Return Wizard</button>
+			<button type="button" (click) = "Step2()" id="step3Btn" class="btn btn-primary">Continue To Create Project</button>
+		</div> 
+	</div> 
+	<div class="col-12 col-sm-6 col-md-8" *ngIf = "step3Div">
+		<h2>Create Project Wizard - Step 3 Of 3</h2>
+		<div class="alert alert-danger col-sm-4 offset col-sm-4" style=" margin: 0px auto;margin-top: 10px; "  role="alert" *ngIf="ErrorAlert"  >{{ErrorAlert}}</div>
+		<div class="col-sm-4 offset col-sm-4" id="comboGroup">
+			<label for="projectName" style="display:inline-block ;text-align: center; ">Project Name:</label>
+			<input id="projectName" type="text" class="form-control form-inline" [(ngModel)]="projectName" style="width:250px;margin-bottom: 3px " placeholder="Enter Project Name">
+			<label for="projectDesc"  >Project Description</label>
+			<textarea id="projectDesc" [(ngModel)]="description" rows="7" class="form-control" style="width: 500px;margin-top: 3px"></textarea>
+			<ol><h3 style="margin-top: 10px;text-align: left" >Required Documents</h3>
+				<li style="margin: 3px;">Functional Specification</li>
+				<li style="margin: 3px;">User Requirement Specification</li>
+				<li style="margin: 3px;">Functional Design</li>
+				<li style="margin: 3px;">{{resDocs?.Scenario}}</li>
+				<li style="margin: 3px;">{{resDocs?.Complainces}}</li>
+				<li style="margin: 3px;">{{resDocs?.Duration}}</li>
+				<li style="margin: 3px;">{{resDocs?.Budget}}</li>
+				<li style="margin: 3px;">{{resDocs?.Size}}</li>
+				<li style="margin: 3px;">{{resDocs?.Role}}</li>
+			</ol>
+		</div>
+		<div class="col-12 col-sm-9 col-md-9 ">
+			<button type="button" id="step2Btn" class="btn btn-danger" (click)="cancel()">Cancel</button>
+			<button type="button" id="step2Btn" class="btn btn-danger" (click)="reset()">Reset</button>
+			<button type="button" id="step2Btn" class="btn btn-danger" (click) = "returnWizard()">Return Wizard</button>
+			<button type="button" id="step2Btn" (click) = "saveAsDrafts()" class="btn btn-danger">Save As Drafts</button>
+			<button type="button" (click) = "Step3()" id="step3Btn" class="btn btn-primary"> Create Project</button>
+		</div> 
+	</div>

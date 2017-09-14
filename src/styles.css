@@ -1,0 +1,77 @@
+body { 
+  background: url(assets/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+nav{
+	opacity: 0.5;
+}
+#sideNav1{
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #dfdfdf;
+	border-radius: 5px;
+} 
+#sideNav1 li{
+	list-style: none;
+	padding-top:10px; 
+}
+#sideNav1 li:nth-child(odd) {
+	background-color: #eeeeee;
+	padding:5px; 
+	border-radius: 5px;
+}
+#sideNav1 li:nth-child(even){
+	padding: 5px;
+} 
+#Table1{
+	margin: 20px 10px 0px 10px;
+	border-radius: 5px;
+}
+thead{
+	background-color: #dfdfdf;
+}
+#Table1 tbody tr:hover{
+    background-color: black;
+    color:#ffffff;
+}
+a{
+	color:#383a3d;
+}
+a:hover{
+	color:#383a3d;
+	text-decoration: none;
+}
+a:visited{
+	color:#383a3d;
+}
+a:active{
+	color:#383a3d;
+	text-decoration: none;
+}
+h2{
+	margin: 0px auto;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#comboGroup{
+	margin: 0px auto;
+}
+.selectForm{
+	margin-top: 5px;
+	padding: 10px;
+	width:20em;
+	border-radius: 5px;
+} 
+#step1Btn{
+	margin: 0px auto;
+	margin-top: 5px; 
+	margin-left: 80px;
+}  
+
+
+
+
